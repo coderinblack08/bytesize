@@ -9,8 +9,10 @@ import {
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { NextPage } from "next";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { pb } from "../lib/pb";
+import { getDate } from "../lib/utils";
 
 const itemVariant = { hidden: { opacity: 0 }, show: { opacity: 1 } };
 
@@ -18,14 +20,15 @@ const Login: NextPage = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm();
+  const router = useRouter();
 
   const onSubmit = async ({ email, password }: any) => {
     const authData = await pb
       .collection("users")
       .authWithPassword(email, password);
-    console.log(authData);
+    router.push(`/my-bytes`);
   };
 
   return (
@@ -41,7 +44,7 @@ const Login: NextPage = () => {
         as={motion.div}
       >
         <Heading size="xl" variants={itemVariant} as={motion.h1}>
-          Sign up
+          Log in
         </Heading>
         <VStack
           mt={4}
@@ -75,6 +78,7 @@ const Login: NextPage = () => {
           <Button
             w="full"
             variants={itemVariant}
+            isLoading={isSubmitting}
             as={motion.button}
             type="submit"
           >

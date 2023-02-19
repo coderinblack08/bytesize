@@ -5,3 +5,5 @@ export const getDate = () => {
   const year = date.getFullYear();
   return `${month}-${day}-${year}`;
 };
+
+export const fetcher = (url) => fetch(url).then((res) => res.json());

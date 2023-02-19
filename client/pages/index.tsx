@@ -1,34 +1,25 @@
-import { ChevronRightIcon } from "@chakra-ui/icons";
-import { Box, Button, Center, Heading, Text } from "@chakra-ui/react";
+import { Link, Box, Button, Center, Heading, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import NextLink from "next/link";
 import { NextPage } from "next";
-import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useUserStore } from "../lib/pb";
-import { getDate } from "../lib/utils";
 
 const itemVariant = { hidden: { opacity: 0 }, show: { opacity: 1 } };
 
 const Home: NextPage = () => {
   const user = useUserStore((state) => state.user);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      router.push(`/my-bytes`);
+    }
+  }, [user]);
 
   return (
     <Center minH="100vh">
-      {user && (
-        <Button
-          position="fixed"
-          top={0}
-          w="100vw"
-          rounded="none"
-          colorScheme="blue"
-          rightIcon={<ChevronRightIcon boxSize={6} />}
-          size="sm"
-          fontWeight="bold"
-          href={`/byte/${getDate()}`}
-          as={Link}
-        >
-          Read Today's Byte
-        </Button>
-      )}
       <Box
         w="lg"
         variants={{
@@ -67,6 +58,11 @@ const Home: NextPage = () => {
             Get your daily byte
           </Button>
         </Link>
+        <NextLink href="/login">
+          <Link as={motion.div} variants={itemVariant} color="blue.200" mt={4}>
+            Already have an account?
+          </Link>
+        </NextLink>
       </Box>
     </Center>
   );

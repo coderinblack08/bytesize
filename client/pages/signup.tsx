@@ -1,3 +1,4 @@
+import NextLink from "next/link";
 import {
   Box,
   Button,
@@ -5,26 +6,31 @@ import {
   Checkbox,
   Heading,
   Input,
+  Link,
   VStack,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { NextPage } from "next";
 import { useForm } from "react-hook-form";
 import { pb } from "../lib/pb";
+import { useRouter } from "next/router";
 
 const itemVariant = { hidden: { opacity: 0 }, show: { opacity: 1 } };
 
 const Signup: NextPage = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm();
 
   const onSubmit = async (data: any) => {
-    const authData = await pb
+    await pb
       .collection("users")
       .create({ ...data, passwordConfirm: data.password });
+    router.push("/categories");
   };
 
   return (
@@ -42,6 +48,17 @@ const Signup: NextPage = () => {
         <Heading size="xl" variants={itemVariant} as={motion.h1}>
           Sign up
         </Heading>
+        <NextLink href="/login">
+          <Link
+            as={motion.div}
+            variants={itemVariant}
+            color="blue.200"
+            mt={2}
+            display="block"
+          >
+            Already have an account?
+          </Link>
+        </NextLink>
         <VStack
           mt={4}
           alignItems="flex-start"
@@ -72,6 +89,7 @@ const Signup: NextPage = () => {
             I agree to the receiving daily emails
           </Checkbox>
           <Button
+            isLoading={isSubmitting}
             w="full"
             variants={itemVariant}
             as={motion.button}

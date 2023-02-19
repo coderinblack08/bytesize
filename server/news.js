@@ -1,30 +1,26 @@
-require("dotenv").config();
-import axios from "axios";
+import NewsAPI from "newsapi";
+import * as dotenv from "dotenv";
+dotenv.config();
+const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 
-const getDate = () => {
-  let d = new Date();
-  let month =
-    (d.getMonth() + 1).toString().length == 1
-      ? `0${d.getMonth() + 1}`
-      : d.getMonth() + 1;
-  return `${d.getFullYear()}-${month}-${d.getDate()}`;
-};
-
-const getNews = (keyword, date) => {
-  // keyword: String: business
-  // Date: Array: [2023-02-19, 2023-02-20]
-  axios
-    .get(
-      `https://newsapi.org/v2/everything?q=${keyword}&from=${date[0]}&to=${date[1]}&sortBy=popularity&apiKey=`
-    )
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .finally(function () {
-      // always executed
-    });
-};
+newsapi.v2
+  .topHeadlines({
+    q: "politics",
+    category: "politics",
+    from: "2023-02-17",
+    to: "2023-02-19",
+    language: "en",
+    country: "us",
+    sortBy: "relevancy",
+    page: 1,
+    pageSize: 6,
+  })
+  .then((response) => {
+    console.log(response);
+    /*
+    {
+      status: "ok",
+      articles: [...]
+    }
+  */
+  });

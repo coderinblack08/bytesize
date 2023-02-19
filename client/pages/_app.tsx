@@ -4,6 +4,7 @@ import { Inter } from "@next/font/google";
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
 import { pb, useUserStore } from "../lib/pb";
+import "@/styles/globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

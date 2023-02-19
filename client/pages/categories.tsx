@@ -1,231 +1,54 @@
-import { Box, Center, Checkbox, Heading } from "@chakra-ui/react";
+import {
+  Button,
+  Center,
+  Flex,
+  Heading,
+  VStack,
+  Wrap,
+  WrapItem,
+} from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { NextPage } from "next";
+import useSWR from "swr";
+
+import { CheckIcon } from "@chakra-ui/icons";
+import { useState } from "react";
+import { API_URL } from "../lib/constants";
+import { fetcher } from "../lib/utils";
 
 const itemVariant = { hidden: { opacity: 0 }, show: { opacity: 1 } };
 
-const Categories: NextPage = () => {
+const CustomCheckbox: React.FC<React.PropsWithChildren> = ({ children }) => {
+  const [checked, setChecked] = useState(false);
   return (
-    <Center minH="100vh">
-      <Box
-        w="lg"
-        variants={{
-          hidden: { opacity: 0 },
-          show: { opacity: 1, transition: { staggerChildren: 0.2 } },
-        }}
-        initial="hidden"
-        animate="show"
-        as={motion.div}
-      >
-        <Heading
-          size="xl"
-          variants={itemVariant}
-          as={motion.h1}
-          layoutId="heading"
-        >
-          Choose your interests.
+    <Button
+      display="inline-flex"
+      colorScheme={checked ? "blue" : "gray"}
+      leftIcon={checked ? <CheckIcon /> : undefined}
+      onClick={() => setChecked(!checked)}
+    >
+      {children}
+    </Button>
+  );
+};
+
+const Categories: NextPage = () => {
+  const { data } = useSWR<string[]>(`${API_URL}/api/categories`, fetcher);
+
+  return (
+    <Center minH="100vh" py={16} px={5}>
+      <VStack spacing={4} align="stretch" w="xl">
+        <Heading size="xl" variants={itemVariant} as={motion.h1}>
+          Choose your interests
         </Heading>
-        <Checkbox
-          mt={2}
-          size="lg"
-          color="dimgray"
-          display="block"
-          variants={itemVariant}
-          as={motion.text}
-        >
-          World News
-        </Checkbox>
-        <Checkbox
-          mt={2}
-          size="lg"
-          color="dimgray"
-          display="block"
-          variants={itemVariant}
-          as={motion.text}
-        >
-          Politics
-        </Checkbox>
-        <Checkbox
-          mt={2}
-          size="lg"
-          color="dimgray"
-          display="block"
-          variants={itemVariant}
-          as={motion.text}
-        >
-          Business
-        </Checkbox>
-        <Checkbox
-          mt={2}
-          size="lg"
-          color="dimgray"
-          display="block"
-          variants={itemVariant}
-          as={motion.text}
-        >
-          Finance
-        </Checkbox>
-        <Checkbox
-          mt={2}
-          size="lg"
-          color="dimgray"
-          display="block"
-          variants={itemVariant}
-          as={motion.text}
-        >
-          Sports
-        </Checkbox>
-        <Checkbox
-          mt={2}
-          size="lg"
-          color="dimgray"
-          display="block"
-          variants={itemVariant}
-          as={motion.text}
-        >
-          Entertainment
-        </Checkbox>
-        <Checkbox
-          mt={2}
-          size="lg"
-          color="dimgray"
-          display="block"
-          variants={itemVariant}
-          as={motion.text}
-        >
-          Technology
-        </Checkbox>
-        <Checkbox
-          mt={2}
-          size="lg"
-          color="dimgray"
-          display="block"
-          variants={itemVariant}
-          as={motion.text}
-        >
-          Health
-        </Checkbox>
-        <Checkbox
-          mt={2}
-          size="lg"
-          color="dimgray"
-          display="block"
-          variants={itemVariant}
-          as={motion.text}
-        >
-          Science
-        </Checkbox>
-        <Checkbox
-          mt={2}
-          size="lg"
-          color="dimgray"
-          display="block"
-          variants={itemVariant}
-          as={motion.text}
-        >
-          Education
-        </Checkbox>
-        <Checkbox
-          mt={2}
-          size="lg"
-          color="dimgray"
-          display="block"
-          variants={itemVariant}
-          as={motion.text}
-        >
-          Environment
-        </Checkbox>
-        <Checkbox
-          mt={2}
-          size="lg"
-          color="dimgray"
-          display="block"
-          variants={itemVariant}
-          as={motion.text}
-        >
-          Crime
-        </Checkbox>
-        <Checkbox
-          mt={2}
-          size="lg"
-          color="dimgray"
-          display="block"
-          variants={itemVariant}
-          as={motion.text}
-        >
-          Immigration
-        </Checkbox>
-        <Checkbox
-          mt={2}
-          size="lg"
-          color="dimgray"
-          display="block"
-          variants={itemVariant}
-          as={motion.text}
-        >
-          Religion
-        </Checkbox>
-        <Checkbox
-          mt={2}
-          size="lg"
-          color="dimgray"
-          display="block"
-          variants={itemVariant}
-          as={motion.text}
-        >
-          Lifestyle
-        </Checkbox>
-        <Checkbox
-          mt={2}
-          size="lg"
-          color="dimgray"
-          display="block"
-          variants={itemVariant}
-          as={motion.text}
-        >
-          Fashion
-        </Checkbox>
-        <Checkbox
-          mt={2}
-          size="lg"
-          color="dimgray"
-          display="block"
-          variants={itemVariant}
-          as={motion.text}
-        >
-          Travel
-        </Checkbox>
-        <Checkbox
-          mt={2}
-          size="lg"
-          color="dimgray"
-          display="block"
-          variants={itemVariant}
-          as={motion.text}
-        >
-          Food
-        </Checkbox>
-        <Checkbox
-          mt={2}
-          size="lg"
-          color="dimgray"
-          display="block"
-          variants={itemVariant}
-          as={motion.text}
-        >
-          Art
-        </Checkbox>
-        <Checkbox
-          mt={2}
-          size="lg"
-          color="dimgray"
-          display="block"
-          variants={itemVariant}
-          as={motion.text}
-        >
-          Weather
-        </Checkbox>
-      </Box>
+        <Wrap>
+          {data?.map((category, index) => (
+            <WrapItem key={index}>
+              <CustomCheckbox>{category}</CustomCheckbox>
+            </WrapItem>
+          ))}
+        </Wrap>
+      </VStack>
     </Center>
   );
 };

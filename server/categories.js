@@ -1,4 +1,4 @@
-let categories = [
+const categories = [
   "World News",
   "Politics",
   "Business",

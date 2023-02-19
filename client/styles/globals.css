@@ -1,9 +1,9 @@
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -104,4 +104,80 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+.button {
+  display: flex;
+  height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+  border-radius: 0.5rem;
+  border-style: none;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  text-decoration-line: none;
+  background-color: hsl(204 100% 80% / 0.4);
+  color: hsl(204 100% 30%);
+}
+
+.button:hover {
+  background-color: hsl(204 100% 80% / 0.6);
+}
+
+.button:focus-visible,
+.button[data-focus-visible] {
+  outline: 2px solid hsl(204 100% 40%);
+  outline-offset: 2px;
+}
+
+.button[aria-disabled="true"] {
+  opacity: 0.5;
+}
+
+.secondary {
+  background-color: transparent;
+  color: currentColor;
+}
+
+.secondary:hover {
+  background-color: hsl(204 10% 10% / 0.05);
+}
+
+.dark .secondary {
+  background-color: transparent;
+}
+
+.dark .secondary:hover {
+  background-color: hsl(204 20% 100% / 0.05);
+}
+
+.button[aria-checked="true"] {
+  background-color: hsl(204 100% 40%);
+  color: hsl(204 20% 100%);
+}
+
+.button:hover[aria-checked="true"] {
+  background-color: hsl(204 100% 32%);
+}
+
+.dark .button {
+  background-color: hsl(204 100% 40% / 0.25);
+  color: hsl(204 100% 86%);
+}
+
+.dark .button:hover {
+  background-color: hsl(204 100% 40% / 0.4);
+}
+
+.dark .button[aria-checked="true"] {
+  background-color: hsl(204 100% 40%);
+  color: hsl(204 20% 100%);
+}
+
+.dark .button:hover[aria-checked="true"] {
+  background-color: hsl(204 100% 32%);
 }
