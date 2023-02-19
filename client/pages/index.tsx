@@ -47,7 +47,7 @@ const Home: NextPage = () => {
         >
           Your Personalized Daily "Wrapped" For News
         </Text>
-        <Link href="/signup">
+        <Link href="/login">
           <Button
             w="full"
             mt={4}
@@ -58,11 +58,6 @@ const Home: NextPage = () => {
             Get your daily byte
           </Button>
         </Link>
-        <NextLink href="/login">
-          <Link as={motion.div} variants={itemVariant} color="blue.200" mt={4}>
-            Already have an account?
-          </Link>
-        </NextLink>
       </Box>
     </Center>
   );

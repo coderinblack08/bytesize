@@ -1,5 +1,5 @@
 {
-  "name": "bytesize",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -20,6 +20,7 @@
     "ariakit": "^2.0.0-next.43",
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",
+    "formik": "^2.2.9",
     "framer-motion": "^9.0.4",
     "next": "13.1.6",
     "pocketbase": "^0.10.2",

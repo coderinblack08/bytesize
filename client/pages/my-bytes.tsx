@@ -1,12 +1,4 @@
-import {
-  Button,
-  Container,
-  Heading,
-  Link,
-  ListItem,
-  Text,
-  UnorderedList,
-} from "@chakra-ui/react";
+import { Button, Container, Heading, Text } from "@chakra-ui/react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { pb, useUserStore } from "../lib/pb";

@@ -4,15 +4,16 @@ import {
   Center,
   Checkbox,
   Heading,
+  Link,
   Input,
   VStack,
 } from "@chakra-ui/react";
+import NextLink from "next/link";
 import { motion } from "framer-motion";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { pb } from "../lib/pb";
-import { getDate } from "../lib/utils";
 
 const itemVariant = { hidden: { opacity: 0 }, show: { opacity: 1 } };
 
@@ -46,6 +47,17 @@ const Login: NextPage = () => {
         <Heading size="xl" variants={itemVariant} as={motion.h1}>
           Log in
         </Heading>
+        <NextLink href="/signup">
+          <Link
+            as={motion.div}
+            variants={itemVariant}
+            color="blue.200"
+            display="block"
+            mt={2}
+          >
+            Don't have an account?
+          </Link>
+        </NextLink>
         <VStack
           mt={4}
           alignItems="flex-start"
@@ -57,7 +69,7 @@ const Login: NextPage = () => {
             placeholder="Email Address"
             variants={itemVariant}
             as={motion.input}
-            // type="email"
+            type="email"
             {...register("email", { required: true })}
           />
           <Input

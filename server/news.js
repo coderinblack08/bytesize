@@ -3,24 +3,18 @@ import * as dotenv from "dotenv";
 dotenv.config();
 const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 
-newsapi.v2
-  .topHeadlines({
-    q: "politics",
-    category: "politics",
-    from: "2023-02-17",
-    to: "2023-02-19",
-    language: "en",
-    country: "us",
-    sortBy: "relevancy",
-    page: 1,
-    pageSize: 6,
-  })
-  .then((response) => {
-    console.log(response);
-    /*
-    {
-      status: "ok",
-      articles: [...]
-    }
-  */
-  });
+const getNews = (q, dates, sort, size) => {
+  newsapi.everything({
+      q: q,
+      from: dates[0],
+      to: dates[1],
+      language: "en",
+      sortBy: sort,
+      page: 1,
+      pageSize: size,
+    }).then((response) => {
+      return response;
+    });
+};
+
+export default getNews;
