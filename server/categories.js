@@ -21,4 +21,6 @@ const categories = [
   "Weather",
 ];
 
+// no travel, immigration, finance
+
 export default categories;

@@ -29,13 +29,14 @@ const Login: NextPage = () => {
     const authData = await pb
       .collection("users")
       .authWithPassword(email, password);
-    router.push(`/my-bytes`);
+    router.push(`/todays-byte`);
   };
 
   return (
     <Center minH="100vh">
       <Box
         w="lg"
+        p="10"
         variants={{
           hidden: { opacity: 0 },
           show: { opacity: 1, transition: { staggerChildren: 0.2 } },

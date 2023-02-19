@@ -19,6 +19,7 @@ const Bytes: NextPage = () => {
       >
         Logout
       </Button>
+
       <Heading size="xl">Archive</Heading>
       <Text color="dimgray">No past archived bytes found</Text>
     </Container>

@@ -27,7 +27,6 @@ const CustomCheckbox: React.FC<
     hasCategory: boolean;
   }>
 > = ({ toggleCategory, hasCategory, children }) => {
-  const [checked, setChecked] = useState(false);
   return (
     <Button
       display="inline-flex"
@@ -50,6 +49,7 @@ async function updateCategories(_: any, { arg: { categories } }: any) {
 
 const Categories: NextPage = () => {
   const toast = useToast();
+  const router = useRouter();
   const user = useUserStore((state) => state.user);
   const { trigger, isMutating } = useSWRMutation(
     "/categories/update",
@@ -118,6 +118,7 @@ const Categories: NextPage = () => {
                 });
               }
               await trigger({ categories });
+              router.push("/todays-byte");
             }}
             isLoading={isMutating}
             mt={4}

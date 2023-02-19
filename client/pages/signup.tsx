@@ -29,7 +29,8 @@ const Signup: NextPage = () => {
   const onSubmit = async (data: any) => {
     await pb
       .collection("users")
-      .create({ ...data, passwordConfirm: data.password });
+      .create({ ...data, passwordConfirm: data.password, categories: "[]" });
+    await pb.collection("users").authWithPassword(data.email, data.password);
     router.push("/categories");
   };
 
@@ -37,6 +38,7 @@ const Signup: NextPage = () => {
     <Center minH="100vh">
       <Box
         w="lg"
+        p="10"
         variants={{
           hidden: { opacity: 0 },
           show: { opacity: 1, transition: { staggerChildren: 0.2 } },

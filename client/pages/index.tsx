@@ -14,13 +14,14 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (user) {
-      router.push(`/my-bytes`);
+      router.push(`/todays-byte`);
     }
   }, [user]);
 
   return (
     <Center minH="100vh">
       <Box
+        p="10"
         w="lg"
         variants={{
           hidden: { opacity: 0 },

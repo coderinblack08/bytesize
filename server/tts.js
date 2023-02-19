@@ -1,12 +1,8 @@
-import { open } from "fs/promises";
-import { getVoiceChunks } from "iri";
+import azureTTS from "tts3";
 
-const iterator = getVoiceChunks(
-  "hola!",
-  "es-ES-AlvaroNeural"
-)(async () => {
-  const f = await open("./audio.mp3", "w+");
-  for await (const chunk of iterator) {
-    f.write(chunk);
-  }
-})();
+azureTTS.get(azureTTS.createBrowser(), {
+  text: "Hello world",
+  output: "./test.ogg",
+  voice: "jacob",
+  language: "English (United States)",
+});
