@@ -14,17 +14,18 @@ import { pb } from "../lib/pb";
 
 const itemVariant = { hidden: { opacity: 0 }, show: { opacity: 1 } };
 
-const Signup: NextPage = () => {
+const Login: NextPage = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async ({ email, password }: any) => {
     const authData = await pb
       .collection("users")
-      .create({ ...data, passwordConfirm: data.password });
+      .authWithPassword(email, password);
+    console.log(authData);
   };
 
   return (
@@ -85,4 +86,4 @@ const Signup: NextPage = () => {
   );
 };
 
-export default Signup;
+export default Login;

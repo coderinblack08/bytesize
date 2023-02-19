@@ -1,13 +1,37 @@
-import { Box, Button, Center, Heading, Text } from "@chakra-ui/react";
+import { ChevronRightIcon } from "@chakra-ui/icons";
+import {
+  Avatar,
+  Box,
+  Button,
+  Center,
+  Heading,
+  Icon,
+  Text,
+} from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { NextPage } from "next";
 import Link from "next/link";
+import { useUserStore } from "../lib/pb";
 
 const itemVariant = { hidden: { opacity: 0 }, show: { opacity: 1 } };
 
 const Home: NextPage = () => {
+  const user = useUserStore((state) => state.user);
+
   return (
     <Center minH="100vh">
+      <Button
+        position="fixed"
+        top={0}
+        w="100vw"
+        rounded="none"
+        colorScheme="blue"
+        rightIcon={<ChevronRightIcon boxSize={6} />}
+        size="sm"
+        fontWeight="bold"
+      >
+        Read Today's Byte
+      </Button>
       <Box
         w="lg"
         variants={{
