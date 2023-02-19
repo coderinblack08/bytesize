@@ -1,15 +1,6 @@
-import {
-  Box,
-  Button,
-  Center,
-  Heading,
-  Text,
-  Checkbox,
-  CheckboxGroup,
-} from "@chakra-ui/react";
+import { Box, Center, Checkbox, Heading } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { NextPage } from "next";
-import Link from "next/link";
 
 const itemVariant = { hidden: { opacity: 0 }, show: { opacity: 1 } };
 
