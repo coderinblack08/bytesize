@@ -139,38 +139,42 @@ const TodayBytes: NextPage = () => {
             as={motion.div}
           >
             {data?.map((article: any, index: number) => {
-              return (
-                <Box
-                  key={index}
-                  variants={itemVariant}
-                  as={motion.div}
-                  bg="rgba(0, 0, 0, 80%)"
-                  rounded="xl"
-                  overflow="hidden"
-                  shadow="lg"
-                >
-                  <Box userSelect="none" position="relative">
-                    {article.image && (
-                      <Image
-                        onError={(e) => {
-                          e.currentTarget.style.display = "none";
-                        }}
-                        src={article.image}
-                      />
-                    )}
-                    <Box p={5}>
-                      <Heading mb={4} size="lg" letterSpacing="tight">
-                        {article.title}
-                      </Heading>
-                      <Text fontWeight="bold">By {article.publisher}</Text>
-                      <Divider my={4} />
-                      <Text lineHeight="tall" color="whiteAlpha.700">
-                        {article.content}
-                      </Text>
+              console.log(user);
+
+              if (user.categories.includes(article.category)) {
+                return (
+                  <Box
+                    key={index}
+                    variants={itemVariant}
+                    as={motion.div}
+                    bg="rgba(0, 0, 0, 80%)"
+                    rounded="xl"
+                    overflow="hidden"
+                    shadow="lg"
+                  >
+                    <Box userSelect="none" position="relative">
+                      {article.image && (
+                        <Image
+                          onError={(e) => {
+                            e.currentTarget.style.display = "none";
+                          }}
+                          src={article.image}
+                        />
+                      )}
+                      <Box p={5}>
+                        <Heading mb={4} size="lg" letterSpacing="tight">
+                          {article.title}
+                        </Heading>
+                        <Text fontWeight="bold">By {article.publisher}</Text>
+                        <Divider my={4} />
+                        <Text lineHeight="tall" color="whiteAlpha.700">
+                          {article.content}
+                        </Text>
+                      </Box>
                     </Box>
                   </Box>
-                </Box>
-              );
+                );
+              }
             })}
           </SimpleGrid>
         )}
